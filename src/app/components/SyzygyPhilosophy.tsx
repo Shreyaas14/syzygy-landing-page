@@ -29,7 +29,7 @@ export default function SyzygyPhilosophy() {
           blockquote: ({ ...props }) => (
             <blockquote className="border-l-4 border-gray-400 pl-4 italic my-4 text-gray-700" {...props} />
           ),
-          code: ({ node, ...props }) => (
+          code: ({ ...props }) => (
             <code className="bg-gray-200 rounded px-1 py-0.5 font-mono text-sm" {...props} />
           ),
         }}
