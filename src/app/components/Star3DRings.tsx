@@ -87,6 +87,7 @@ export default function StarWith3DRings({
 
   return (
     <group ref={groupRef} scale={scale}>
+      {/* Star */}
       <mesh ref={starRef}>
         <extrudeGeometry args={[starShape, { depth: 0.2, bevelEnabled: false }]} />
         <meshStandardMaterial color={starColor} metalness={0.5} roughness={0.4} />
