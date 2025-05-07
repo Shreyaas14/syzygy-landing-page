@@ -9,6 +9,12 @@ import { OrbitControls } from '@react-three/drei';
 import {useEffect, useState } from 'react';
 
 export default function PeoplePage() {
+    const [isTouch, setIsTouch] = useState(false);
+
+    useEffect(() => {
+        setIsTouch('ontouchstart' in window);
+    }, []);
+    
     const [qaData, setQaData] = useState<{
         questions: string[];
         answers: Record<string, string[]>;
@@ -66,7 +72,10 @@ export default function PeoplePage() {
 
       <section className="flex-1 h-screen">
         <ClientOnly>
-          <Canvas camera={{ position: [0, 0, 5] }}>
+          <Canvas camera={{ position: [0, 0, 5] }} 
+          onCreated={({ gl }) => {
+            gl.domElement.style.touchAction = 'pan-y';
+          }}>
             <ambientLight intensity={0.5} />
             <directionalLight position={[5, 5, 5]} />
 
@@ -80,7 +89,13 @@ export default function PeoplePage() {
               colors={colors} 
             />
 
-            <OrbitControls enablePan={false} enableZoom={false} />
+            {!isTouch && (
+                <OrbitControls
+                enablePan={false}
+                enableZoom={false}
+                enableRotate={true}
+                />
+            )}
           </Canvas>
         </ClientOnly>
       </section>

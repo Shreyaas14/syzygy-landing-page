@@ -16,6 +16,12 @@ type LibraryEntry = {
 };
 
 export default function LibraryPage() {
+  const [isTouch, setIsTouch] = useState(false);
+  
+    useEffect(() => {
+      setIsTouch('ontouchstart' in window);
+    }, []);
+  
   const [entries, setEntries] = useState<LibraryEntry[]>([]);
 
   useEffect(() => {
@@ -41,7 +47,7 @@ export default function LibraryPage() {
       {/* Liquid Star Visual */}
       <section className="h-screen">
         <ClientOnly>
-          <Canvas camera={{ position: [0, 0, 5] }}>
+          <Canvas camera={{ position: [0, 0, 5] }} onCreated={({ gl }) => {gl.domElement.style.touchAction = 'pan-y';}}>
             <ambientLight intensity={0.5} />
             <directionalLight position={[5, 5, 5]} />
             <LiquidStarAndRadar
@@ -49,7 +55,13 @@ export default function LibraryPage() {
               ringColor="#f40f0f"
               showDots={false}
             />
-            <OrbitControls enablePan={false} enableZoom={false} />
+            {!isTouch && (
+                <OrbitControls
+                enablePan={false}
+                enableZoom={false}
+                enableRotate={true}
+                />
+            )}
           </Canvas>
         </ClientOnly>
       </section>
