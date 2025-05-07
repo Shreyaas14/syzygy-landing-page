@@ -51,7 +51,6 @@ export default function MarkdownViewer({ slug }: { slug: string }) {
     );
   }
 
-  // 1) Define your custom renderers with the `Components` type
   const components: Components = {
     h1: ({ ...props }) => (
       <h1 className="text-4xl font-light mt-8 mb-4 leading-tight" {...props} />
@@ -75,7 +74,6 @@ export default function MarkdownViewer({ slug }: { slug: string }) {
       <ol className="list-decimal list-inside mb-4 space-y-1" {...props} />
     ),
 
-    // 2) Link: simple passthrough to external or Next’s Link
     a: ({ href, children, ...props }: { href?: string; children: ReactNode } & any) => {
       if (href && /^(https?:)?\/\//.test(href)) {
         return (
@@ -91,7 +89,6 @@ export default function MarkdownViewer({ slug }: { slug: string }) {
       );
     },
 
-    // 3) Code renderer: inline check works without extra imported types
     code: ({ inline, className, children, ...props }: any) => {
       if (inline) {
         return (
