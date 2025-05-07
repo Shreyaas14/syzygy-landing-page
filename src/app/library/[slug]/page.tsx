@@ -1,10 +1,10 @@
 import MarkdownViewer from '@/app/components/MarkdownViewer';
 
-export default function LibraryEntryPage({
+export default async function LibraryEntryPage({
   params,
 }: {
   params: { slug: string };
 }) {
-  const { slug } = params; 
+  const { slug } = await params;
   return <MarkdownViewer slug={slug} />;
 }
