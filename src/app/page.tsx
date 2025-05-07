@@ -21,7 +21,7 @@ export default function HomePage() {
           <ambientLight intensity={0.5} />
           <directionalLight position={[5, 5, 5]} />
           <StarAndRings />
-          <OrbitControls enablePan={false} enableZoom={false} enableRotate={!isTouch}/>
+          !isTouch && <OrbitControls enablePan={false} enableZoom={false} enableRotate={true}/>
         </Canvas>
       </section>
 
