@@ -9,7 +9,9 @@ export default function HomePage() {
     <main className="bg-black text-white">
       {/* HERO */}
       <section className="h-screen">
-        <Canvas camera={{ position: [0, 0, 5] }}>
+        <Canvas 
+        camera={{ position: [0, 0, 5] }} 
+        onCreated={({ gl }) => {gl.domElement.style.touchAction = 'pan-y';}}>
           <ambientLight intensity={0.5} />
           <directionalLight position={[5, 5, 5]} />
           <StarAndRings />

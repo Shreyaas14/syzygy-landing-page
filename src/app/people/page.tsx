@@ -35,7 +35,8 @@ export default function PeoplePage() {
         { id: '1f606', field: 'product' },
         { id: 'd954e', field: 'product' },
         { id: '0d2d7', field: 'med' },
-        { id: 'aa15a', field: 'coder' }
+        { id: 'aa15a', field: 'coder' },
+        { id: '32d8b', field: 'med' },
     ];
         
     const colors = staff.map((p) => fieldColors[p.field] || '#ffffff');
