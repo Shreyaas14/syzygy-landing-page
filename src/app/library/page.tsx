@@ -33,17 +33,6 @@ export default function LibraryPage() {
 
   return (
     <main className="bg-white text-black flex flex-col">
-      <header className="w-full border-b border-black/20 bg-white/80 backdrop-blur-sm sticky top-0 z-20">
-        <nav className="max-w-4xl mx-auto flex justify-center space-x-8 p-4">
-          <Link href="/"       className="nav-link">Home</Link>
-          <Link href="/people" className="nav-link">The Collective</Link>
-          <Link href="/warehouse" className="nav-link">The Warehouse</Link>
-          <Link href="/recordroom" className="nav-link">The Studio</Link>
-          <Link href="/museum" className="nav-link">The Museum</Link>
-          <Link href="/meaning" className="nav-link">The Meaning</Link>
-        </nav>
-      </header>
-
       {/* Liquid Star Visual */}
       <section className="h-screen">
         <ClientOnly>

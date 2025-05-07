@@ -49,17 +49,6 @@ export default function PeoplePage() {
 
   return (
     <main className="bg-black text-white min-h-screen">
-      <header className="w-full border-b border-white/20 bg-black/80 backdrop-blur-sm sticky top-0 z-20">
-        <nav className="max-w-4xl mx-auto flex justify-center space-x-8 p-4">
-          <Link href="/"       className="nav-link">Home</Link>
-          <Link href="/library" className="nav-link">The Library</Link>
-          <Link href="/warehouse" className="nav-link">The Warehouse</Link>
-          <Link href="/recordroom" className="nav-link">The Studio</Link>
-          <Link href="/museum" className="nav-link">The Museum</Link>
-          <Link href="/meaning" className="nav-link">The Meaning</Link>
-        </nav>
-      </header>
-
       <section className="py-8">
         <div className="max-w-4xl mx-auto flex flex-wrap justify-center gap-4">
           {staff.map((person) => (
