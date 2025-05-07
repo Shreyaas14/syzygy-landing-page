@@ -73,7 +73,7 @@ export default function MarkdownViewer({ slug }: { slug: string }) {
       <ol className="list-decimal list-inside mb-4 space-y-1" {...props} />
     ),
 
-    // @ts-ignore
+    // @ts-expect-error
     a: ({
       href,
       children,
@@ -98,7 +98,7 @@ export default function MarkdownViewer({ slug }: { slug: string }) {
       );
     },
 
-    // @ts-ignore
+    // @ts-expect-error
     code: ({
       inline,
       className,
