@@ -1,10 +1,11 @@
+// app/library/[slug]/page.tsx
 import MarkdownViewer from '@/app/components/MarkdownViewer';
 
 export default async function LibraryEntryPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const { slug } = await Promise.resolve(params);
+  const { slug } = await params;
   return <MarkdownViewer slug={slug} />;
 }
