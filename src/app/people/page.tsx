@@ -1,5 +1,4 @@
 'use client';
-import Link from 'next/link';
 import ClientOnly from '@/app/components/ClientOnly';
 import SineWaveSeparator from '@/app/components/SineWaveSeparator';
 import ParticleCluster from '@/app/components/ParticleCluster';

@@ -1,5 +1,4 @@
 'use client';
-import Link from 'next/link';
 import { useState, useEffect } from "react";
 import StarWith3DRings from '../components/Star3DRings';
 import { Canvas } from '@react-three/fiber';

@@ -33,15 +33,12 @@ export default function Header() {
   const path = usePathname() || '/';
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // Hide on slug/detail pages
   const isDetail = navItems.some(item => path.startsWith(item.href + '/'));
   if (isDetail) return null;
 
-  // Pick theme
   const { bg, border } =
     themeByPath[path] ?? { bg: 'bg-black/80', border: 'border-white/20' };
 
-  // Don’t show link to the current page
   const visibleNav = navItems.filter(item => item.href !== path);
 
   return (
@@ -53,7 +50,6 @@ export default function Header() {
       `}
     >
       <div className="max-w-4xl mx-auto p-4 flex flex-col items-center">
-        {/* Hamburger (mobile) */}
         <button
           className="sm:hidden mb-2 text-white text-2xl"
           onClick={() => setMenuOpen(o => !o)}
@@ -62,7 +58,6 @@ export default function Header() {
           ☰
         </button>
 
-        {/* Desktop nav */}
         <nav className="hidden sm:flex flex-wrap justify-center gap-6 w-full">
           {visibleNav.map(({ href, label }) => (
             <Link
@@ -75,7 +70,6 @@ export default function Header() {
           ))}
         </nav>
 
-        {/* Mobile drawer */}
         {menuOpen && (
           <nav className="sm:hidden flex flex-col items-center space-y-4 w-full">
             {visibleNav.map(({ href, label }) => (
