@@ -5,6 +5,6 @@ export default async function LibraryEntryPage({
 }: {
   params: { slug: string };
 }) {
-  const { slug } = await params;
+  const { slug } = await Promise.resolve(params);
   return <MarkdownViewer slug={slug} />;
 }
