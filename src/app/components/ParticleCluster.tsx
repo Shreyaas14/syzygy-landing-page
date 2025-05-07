@@ -20,7 +20,6 @@ export default function ParticleCluster({
 }: ParticleClusterProps) {
   const groupRef = useRef<THREE.Group>(null!);
 
-  // 1) Positions as before
   const positions = useMemo(() => {
     const arr = new Float32Array(count * 3);
     for (let i = 0; i < count; i++) {
@@ -36,7 +35,6 @@ export default function ParticleCluster({
     return arr;
   }, [count, radius]);
 
-  // 2) Colors buffer
   const colorArray = useMemo(() => {
     const arr = new Float32Array(count * 3);
     for (let i = 0; i < count; i++) {
@@ -70,7 +68,6 @@ export default function ParticleCluster({
           />
         </bufferGeometry>
 
-        {/* vertexColors tells Three.js to read from the "color" attribute */}
         <pointsMaterial
           vertexColors
           size={0.05}

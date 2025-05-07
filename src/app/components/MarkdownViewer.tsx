@@ -73,7 +73,7 @@ export default function MarkdownViewer({ slug }: { slug: string }) {
       <ol className="list-decimal list-inside mb-4 space-y-1" {...props} />
     ),
 
-    // @ts-expect-error
+    // @ts-expect-error: linter is being annoying and it works 
     a: ({
       href,
       children,
@@ -98,7 +98,7 @@ export default function MarkdownViewer({ slug }: { slug: string }) {
       );
     },
 
-    // @ts-expect-error
+    // @ts-expect-error: linter is being annoying and it works 
     code: ({
       inline,
       className,
