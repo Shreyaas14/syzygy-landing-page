@@ -1,9 +1,7 @@
 'use client';
 import { useRef, useMemo } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
+import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
-import { OrbitControls } from '@react-three/drei';
-import { Environment } from '@react-three/drei';
 
 function StarAndRadar({ starColor = '#dddddd' }) {
   const groupRef = useRef<THREE.Group>(null!);
@@ -34,7 +32,11 @@ function StarAndRadar({ starColor = '#dddddd' }) {
         valley;
       const x = Math.cos(angle) * radius;
       const y = Math.sin(angle) * radius;
-      i === 0 ? shape.moveTo(x, y) : shape.lineTo(x, y);
+      if (i === 0) {
+            shape.moveTo(x, y);
+        } else {
+            shape.lineTo(x, y);
+        }
     }
     shape.closePath();
     return shape;

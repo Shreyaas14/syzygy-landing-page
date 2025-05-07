@@ -4,7 +4,6 @@ import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import { MeshDistortMaterial } from '@react-three/drei';
 
-
 type Props = {
   starColor?: string;
   ringColor?: string;
@@ -14,7 +13,7 @@ type Props = {
 export default function LiquidStarAndRadar({
   starColor = '#dddddd',
   ringColor = 'white',
-  showDots = false,
+  showDots = false,            // we’ll actually use this now
 }: Props) {
   const groupRef = useRef<THREE.Group>(null!);
   const starRef = useRef<THREE.Mesh>(null!);
@@ -22,8 +21,8 @@ export default function LiquidStarAndRadar({
 
   const normalizedColor = useMemo(() => {
     try {
-      return new THREE.Color(ringColor || 'white');
-    } catch (e) {
+      return new THREE.Color(ringColor);
+    } catch {
       console.warn('Invalid ringColor, falling back to white:', ringColor);
       return new THREE.Color('white');
     }
@@ -35,7 +34,7 @@ export default function LiquidStarAndRadar({
     groupRef.current.position.z = Math.sin(t * 0.3) * 0.3;
     groupRef.current.rotation.y = t * 0.2;
 
-    // Liquid wobble effect
+    // Liquid wobble
     const scaleX = 1 + Math.sin(t * 1.2) * 0.03;
     const scaleY = 1 + Math.cos(t * 1.5) * 0.03;
     starRef.current.scale.set(scaleX, scaleY, 1);
@@ -45,7 +44,9 @@ export default function LiquidStarAndRadar({
   });
 
   const starShape = useMemo(() => {
-    const outer = 0.7, diag = 0.35, valley = 0.2;
+    const outer = 0.7,
+      diag = 0.35,
+      valley = 0.2;
     const shape = new THREE.Shape();
     const verts = 16;
     const offset = Math.PI / 2;
@@ -55,7 +56,8 @@ export default function LiquidStarAndRadar({
       const radius = i % 4 === 0 ? outer : i % 4 === 2 ? diag : valley;
       const x = Math.cos(angle) * radius;
       const y = Math.sin(angle) * radius;
-      i === 0 ? shape.moveTo(x, y) : shape.lineTo(x, y);
+      if (i === 0) shape.moveTo(x, y);
+      else shape.lineTo(x, y);
     }
     shape.closePath();
     return shape;
@@ -73,42 +75,53 @@ export default function LiquidStarAndRadar({
 
   return (
     <group ref={groupRef} scale={0.8}>
+      {/* Star */}
       <mesh ref={starRef}>
         <extrudeGeometry args={[starShape, { depth: 0.2, bevelEnabled: false }]} />
-        <MeshDistortMaterial distort={0.4} speed={1} color={starColor} metalness={0.5} roughness={0.4} />
+        <MeshDistortMaterial
+          distort={0.4}
+          speed={1}
+          color={starColor}
+          metalness={0.5}
+          roughness={0.4}
+        />
       </mesh>
 
+      {/* Rings */}
       <group ref={ringsRef}>
-        {radii.map((r) => (
-          <group key={r}>
-            <mesh>
-              <torusGeometry args={[r, 0.02, 16, 100]} />
-              <MeshDistortMaterial distort={0.69} speed={0.2} color={ringColor} />
-            </mesh>
-          </group>
+        {radii.map(r => (
+          <mesh key={r}>
+            <torusGeometry args={[r, 0.02, 16, 100]} />
+            <MeshDistortMaterial distort={0.69} speed={0.2} color={ringColor} />
+          </mesh>
         ))}
       </group>
 
-      <group>
-        {linePoints.map((points, i) => (
-          <line key={`line-${i}`}>
-            <bufferGeometry>
-              <bufferAttribute
-                attach="attributes-position"
-                array={new Float32Array(points.flatMap((p) => [p.x, p.y, p.z]))}
-                count={2}
-                itemSize={3}
+      {/* Dotted Lines (optional) */}
+      {showDots && (
+        <group>
+          {linePoints.map((points, i) => (
+            <line key={i}>
+              <bufferGeometry>
+                <bufferAttribute
+                  attach="attributes-position"
+                  array={new Float32Array(
+                    points.flatMap(p => [p.x, p.y, p.z])
+                  )}
+                  count={2}
+                  itemSize={3}
+                />
+              </bufferGeometry>
+              <lineDashedMaterial
+                color={normalizedColor}
+                dashSize={1.5}
+                gapSize={0.1}
+                scale={1}
               />
-            </bufferGeometry>
-            <lineDashedMaterial
-              color={normalizedColor}
-              dashSize={1.5}
-              gapSize={0.1}
-              scale={1}
-            />
-          </line>
-        ))}
-      </group>
+            </line>
+          ))}
+        </group>
+      )}
     </group>
   );
 }

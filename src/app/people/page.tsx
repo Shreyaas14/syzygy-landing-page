@@ -8,17 +8,6 @@ import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import {useEffect, useState } from 'react';
 
-const staff = ['49f74','1f606','d954e'];
-
-const questions = [
-  '1. What is the greatest contribution to art you have ever seen? Pick one medium, and pick one contribution in that medium, and explain why.',
-  '2. What is the single most impactful research paper since the year 2000?',
-  '3. Paleontology or Astronomy, and why?',
-  '4. Pick one historical civilization you’d want to live in and explain why.',
-  '5. Best conversation you’ve ever had, and why?',
-  '6. Describe yourself in 5 words.',
-];
-
 export default function PeoplePage() {
     const [qaData, setQaData] = useState<{
         questions: string[];

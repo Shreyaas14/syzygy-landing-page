@@ -22,11 +22,11 @@ export default function SyzygyPhilosophy() {
     >
       <ReactMarkdown
         components={{
-          h2: ({ node, ...props }) => <h2 className="text-3xl font-semibold mt-12 mb-4" {...props} />,
-          p: ({ node, ...props }) => <p className="text-lg mb-4 leading-relaxed" {...props} />,
-          ul: ({ node, ...props }) => <ul className="list-disc list-inside mb-4" {...props} />,
-          li: ({ node, ...props }) => <li className="ml-4 mb-2" {...props} />,
-          blockquote: ({ node, ...props }) => (
+          h2: ({ ...props }) => <h2 className="text-3xl font-semibold mt-12 mb-4" {...props} />,
+          p: ({ ...props }) => <p className="text-lg mb-4 leading-relaxed" {...props} />,
+          ul: ({ ...props }) => <ul className="list-disc list-inside mb-4" {...props} />,
+          li: ({ ...props }) => <li className="ml-4 mb-2" {...props} />,
+          blockquote: ({ ...props }) => (
             <blockquote className="border-l-4 border-gray-400 pl-4 italic my-4 text-gray-700" {...props} />
           ),
           code: ({ node, ...props }) => (

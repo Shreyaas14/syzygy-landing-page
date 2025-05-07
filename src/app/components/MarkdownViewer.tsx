@@ -58,28 +58,28 @@ export default function MarkdownViewer({ slug }: { slug: string }) {
           remarkPlugins={[remarkGfm]}
           rehypePlugins={[rehypeRaw]}
           components={{
-            h1: ({ node, ...props }) => (
+            h1: ({ ...props }) => (
               <h1 className="text-4xl font-light mt-8 mb-4 leading-tight" {...props} />
             ),
-            h2: ({ node, ...props }) => (
+            h2: ({ ...props }) => (
               <h2 className="text-3xl font-light mt-6 mb-3 leading-snug" {...props} />
             ),
-            p: ({ node, ...props }) => (
+            p: ({ ...props }) => (
               <p className="mb-4 leading-relaxed text-base" {...props} />
             ),
-            blockquote: ({ node, ...props }) => (
+            blockquote: ({ ...props }) => (
               <blockquote
                 className="border-l-4 border-gray-300 pl-4 italic text-gray-600 my-6"
                 {...props}
               />
             ),
-            ul: ({ node, ...props }) => (
+            ul: ({ ...props }) => (
               <ul className="list-disc list-inside mb-4 space-y-1" {...props} />
             ),
-            ol: ({ node, ...props }) => (
+            ol: ({ ...props }) => (
               <ol className="list-decimal list-inside mb-4 space-y-1" {...props} />
             ),
-            code: ({ node, inline, className, children, ...props }) => {
+            code: ({ inline, className, children, ...props }) => {
               if (inline) {
                 return (
                   <code className="bg-gray-100 px-1 rounded text-sm font-mono" {...props}>
