@@ -1,6 +1,29 @@
 Thoughts and learnings:
 
 ---
+May 3rd, 2025
+
+I finally finished the landing page (well, enough of it to keep going). We lowkey need more devs here. I need to make a UI where people can submit contributions next.
+
+Anyway, back to reading this RL book. Just gonna start from chapter 1 again.
+
+Okay, my takeaways and thoughts from 1.1.
+
+So, this problem space is interesting—reinforcement learning is a separate category from supervised and unsupervised learning because the requirements are inherently different. An agent learning via RL needs to have a goal, and the ability to have a complete understanding of the state space (of its environment). Does the idea of data being labelled or not even matter here then? I guess it’d just be a factor of the space for the agent to learn—so my current guess is no, that’s not an important distinction, but rather another factor for the agent to consider.
+
+This idea of exploitation (using knowledge the agent already has to obtain a reward) versus exploration (trying new actions to discover potentially better selections in the future) is something that’s interesting too.
+
+But I think I have a better picture of what we’re trying to solve here. It’s trying to figure out how an agent can maximize for a reward signal when thrown into an unknown environment—similarly to how humans “learn”.
+
+Reading 1.2, the examples give a lot of clarity and adding “applications” here helps. But one interesting thing is that the state of the agent itself is considered into the decision-making that the agent does.
+
+1.3. So each RL system has 4 main parts to it:
+1. The policy—this is how the agent maps its percieved state of the environment to what action it should take accordingly.
+2. The reward signal—A short-term goal for the RL agent to maximize over time. At first it sounded binary, but upon 3-5 business seconds of critical thinking, it was clear to me that a “score” makes more sense.
+3. The value function—a goal which is good in the long-term. The total amount of reward an agent can expect to accumulate in the future, starting from some state X.
+4. The model—this is what mimics environment behavior, and this is what allows the agent to make inferences on environment behavior given some state X.
+
+I do need to read more, so will do that this week.
 
 April 25th, 2025
 
