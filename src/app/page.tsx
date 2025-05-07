@@ -1,21 +1,27 @@
 'use client';
+import { useEffect, useState } from "react";
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import Link from 'next/link';
 import StarAndRings from './components/StarAndRadar';
 
 export default function HomePage() {
+  const [isTouch, setIsTouch] = useState(false);
+
+  useEffect(() => {
+    setIsTouch('ontouchstart' in window);
+  }, []);
+
   return (
     <main className="bg-black text-white">
       {/* HERO */}
       <section className="h-screen">
         <Canvas 
-        camera={{ position: [0, 0, 5] }} 
-        onCreated={({ gl }) => {gl.domElement.style.touchAction = 'pan-x';}}>
+        camera={{ position: [0, 0, 5] }}>
           <ambientLight intensity={0.5} />
           <directionalLight position={[5, 5, 5]} />
           <StarAndRings />
-          <OrbitControls enablePan={false} enableZoom={false} />
+          <OrbitControls enablePan={false} enableZoom={false} enableRotate={!isTouch}/>
         </Canvas>
       </section>
 
