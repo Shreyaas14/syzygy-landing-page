@@ -14,7 +14,6 @@ interface IdentityProps {
 export default function Identity({
   name,
   description,
-  contact_info,
   color,
 }: IdentityProps) {
   return (
