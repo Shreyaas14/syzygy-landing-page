@@ -62,15 +62,11 @@ export default function ParticleCluster({
         <bufferGeometry>
           <bufferAttribute
             attach="attributes-position"
-            array={positions}
-            count={count}
-            itemSize={3}
+            args={[positions, 3]}
           />
           <bufferAttribute
             attach="attributes-color"
-            array={colorArray}
-            count={count}
-            itemSize={3}
+            args={[colorArray, 3]}
           />
         </bufferGeometry>
 
