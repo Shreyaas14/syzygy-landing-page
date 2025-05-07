@@ -1,7 +1,7 @@
 // components/MarkdownViewer.tsx
 'use client';
 
-import { useEffect, useState, ReactNode } from 'react';
+import { useEffect, useState, ReactNode, HTMLAttributes, AnchorHTMLAttributes } from 'react';
 import ReactMarkdown, { Components } from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
@@ -33,9 +33,7 @@ export default function MarkdownViewer({ slug }: { slug: string }) {
       });
   }, [slug]);
 
-  if (!entry) {
-    return <p className="p-8">Loading…</p>;
-  }
+  if (!entry) return <p className="p-8">Loading…</p>;
   if (entry.type === 'pdf') {
     return (
       <div className="flex h-screen items-center justify-center">
@@ -51,7 +49,8 @@ export default function MarkdownViewer({ slug }: { slug: string }) {
     );
   }
 
-  const components: Components = {
+  // Build as a Partial<Components>
+  const components: Partial<Components> = {
     h1: ({ ...props }) => (
       <h1 className="text-4xl font-light mt-8 mb-4 leading-tight" {...props} />
     ),
@@ -74,10 +73,20 @@ export default function MarkdownViewer({ slug }: { slug: string }) {
       <ol className="list-decimal list-inside mb-4 space-y-1" {...props} />
     ),
 
-    a: ({ href, children, ...props }: { href?: string; children: ReactNode } & any) => {
+    // @ts-ignore
+    a: ({
+      href,
+      children,
+      ...props
+    }: { href?: string; children: ReactNode } & AnchorHTMLAttributes<HTMLAnchorElement>) => {
       if (href && /^(https?:)?\/\//.test(href)) {
         return (
-          <a href={href} target="_blank" rel="noreferrer" {...props}>
+          <a
+            href={href}
+            target="_blank"
+            rel="noreferrer"
+            {...props}
+          >
             {children}
           </a>
         );
@@ -89,7 +98,13 @@ export default function MarkdownViewer({ slug }: { slug: string }) {
       );
     },
 
-    code: ({ inline, className, children, ...props }: any) => {
+    // @ts-ignore
+    code: ({
+      inline,
+      className,
+      children,
+      ...props
+    }: { inline?: boolean; className?: string; children: ReactNode } & HTMLAttributes<HTMLElement>) => {
       if (inline) {
         return (
           <code
@@ -121,7 +136,7 @@ export default function MarkdownViewer({ slug }: { slug: string }) {
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
           rehypePlugins={[rehypeRaw]}
-          components={components}
+          components={components as Components}
         >
           {markdown}
         </ReactMarkdown>
