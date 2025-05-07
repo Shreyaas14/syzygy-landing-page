@@ -107,9 +107,10 @@ export default function StarAndRadar({
             <bufferGeometry>
               <bufferAttribute
                 attach="attributes-position"
-                array={new Float32Array(pts.flatMap((p) => [p.x, p.y, p.z]))}
-                count={2}
-                itemSize={3}
+                args={[
+                  new Float32Array(pts.flatMap(p => [p.x, p.y, p.z])),
+                  3
+                ]}
               />
             </bufferGeometry>
             <lineDashedMaterial
